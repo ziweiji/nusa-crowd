@@ -113,17 +113,20 @@ class indspeech_news_ethnicsr(datasets.GeneratorBasedBuilder):
     def _split_generators(self, dl_manager: datasets.DownloadManager) -> List[datasets.SplitGenerator]:
         fold_name, fold_id = self._get_fold_name_id()
         if fold_name == 'su':
+            fold_name1 = "Sunda"
             fold_name2 = 'Snd'
+            
         else:
+            fold_name1 = 'Jawa'
             fold_name2 = 'Jaw'
         
         urls = _URLS[_DATASETNAME]
         data_dir = Path(dl_manager.download_and_extract(urls))
 #         print("data_dir", data_dir)
-        text_file = os.path.join(data_dir, f"data_indsp_news_ethnicsr-main/{fold_name}/text/transcript.txt")
-        wav_folder = os.path.join(data_dir, f"data_indsp_news_ethnicsr-main/{fold_name}/speech/16kHz/")
-        train_list = os.path.join(data_dir, f"data_indsp_news_ethnicsr-main/{fold_name}/lst/dataset{fold_id}_train_news_{fold_name2}.lst")
-        test_list = os.path.join(data_dir, f"data_indsp_news_ethnicsr-main/{fold_name}/lst/dataset{fold_id}_test_news_{fold_name2}.lst")
+        text_file = os.path.join(data_dir, f"data_indsp_news_ethnicsr-main/{fold_name1}/text/transcript.txt")
+        wav_folder = os.path.join(data_dir, f"data_indsp_news_ethnicsr-main/{fold_name1}/speech/16kHz/")
+        train_list = os.path.join(data_dir, f"data_indsp_news_ethnicsr-main/{fold_name1}/lst/dataset{fold_id}_train_news_{fold_name2}.lst")
+        test_list = os.path.join(data_dir, f"data_indsp_news_ethnicsr-main/{fold_name1}/lst/dataset{fold_id}_test_news_{fold_name2}.lst")
         
         #unzip        
         for speaker_id in range(1, 11):
